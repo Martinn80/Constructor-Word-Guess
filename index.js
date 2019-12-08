@@ -12,23 +12,18 @@ let usStates = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Color
 let randomIndex = Math.floor(Math.random() * usStates.length);
 let randomWord = usStates[randomIndex];
 
-// Pass random word through Word constructor
 computerWord = new Word(randomWord);
 
 let generateNewWord = false;
-
-// Array for guessed letters
 let incorrectLetters = [];
 let correctLetters = [];
-
-// Guesses left
 let guessesLeft = 12;
 
 function chosenWord() {
 
     // Generates new word for State constructor if true
     if (generateNewWord) {
-        // Selects random AfricanCountries array
+        // Selects random US States array
         let randomIndex = Math.floor(Math.random() * usStates.length);
         let randomWord = usStates[randomIndex];
 
@@ -50,7 +45,7 @@ function chosenWord() {
             .prompt([
                 {
                     type: "input",
-                    message: "Guess a letter between A-Z",
+                    message: "Guess a US State, pick a letter between A-Z",
                     name: "userInput"
                 }
             ])
@@ -100,7 +95,7 @@ function chosenWord() {
                             // Call function 
                             chosenWord();
                         } else {
-                            console.log("Sorry, you lose!\n");
+                            console.log("You lose, better luck next time.\n");
 
                             restartGame();
                         }
@@ -116,25 +111,25 @@ function chosenWord() {
         console.log("YOU WIN!\n");
 
         restartGame();
-    }
+    };
 
 
     function completeCheck(key) {
         wordComplete.push(key.guessed);
-    }
+    };
 
-}
+};
 
 function restartGame() {
     inquirer
         .prompt([
             {
                 type: "list",
-                message: "Would you like to:",
+                message: "What would you like to:",
                 choices: ["Play Again", "Exit"],
                 name: "restart"
             }
-        ])
+        ]);
         .then(function (input) {
             if (input.restart === "Play Again") {
                 requireNewWord = true;
@@ -145,7 +140,7 @@ function restartGame() {
             } else {
                 return
             }
-        })
-}
+        });
+};
 
 chosenWord();

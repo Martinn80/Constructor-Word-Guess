@@ -2,7 +2,7 @@
 let Word = require("./word.js");
 let inquirer = require("inquirer");
 
-// letters entry
+// letters Array
 let letterArray = "abcdefghijklmnopqrstuvwxyz";
 
 // List of words to choose from
@@ -22,9 +22,9 @@ let incorrectLetters = [];
 let correctLetters = [];
 
 // Guesses left
-let guessesLeft = 20;
+let guessesLeft = 12;
 
-function knowledge() {
+function chosenWord() {
 
     // Generates new word for State constructor if true
     if (generateNewWord) {
@@ -59,13 +59,13 @@ function knowledge() {
 
                 if (!letterArray.includes(input.userInput) || input.userInput.length > 1) {
                     console.log("\nPlease try again.\n");
-                    knowledge();
+                    chosenWord();
                 } else {
 
 
                     if (incorrectLetters.includes(input.userInput) || correctLetters.includes(input.userInput) || input.userInput === "") {
                         console.log("\nAlready Guessed or Nothing Entered\n");
-                        knowledge();
+                        chosenWord();
                     } else {
 
                         // Checks if guess is correct
@@ -86,3 +86,66 @@ function knowledge() {
 
                             correctLetters.push(input.userInput);
                         }
+
+                        computerWord.log();
+
+                        // Print guesses left
+                        console.log("Guesses Left: " + guessesLeft + "\n");
+
+                        // Print incorrect letters guessed
+                        console.log("Letters Guessed: " + incorrectLetters.join(" ") + "\n");
+
+                        // Guesses left
+                        if (guessesLeft > 0) {
+                            // Call function 
+                            chosenWord();
+                        } else {
+                            console.log("Sorry, you lose!\n");
+
+                            restartGame();
+                        }
+
+
+                        function wordCheck(key) {
+                            wordCheckArray.push(key.guessed);
+                        }
+                    }
+                }
+            })
+    } else {
+        console.log("YOU WIN!\n");
+
+        restartGame();
+    }
+
+
+    function completeCheck(key) {
+        wordComplete.push(key.guessed);
+    }
+
+}
+
+function restartGame() {
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "Would you like to:",
+                choices: ["Play Again", "Exit"],
+                name: "restart"
+            }
+        ])
+        .then(function (input) {
+            if (input.restart === "Play Again") {
+                requireNewWord = true;
+                incorrectLetters = [];
+                correctLetters = [];
+                guessesLeft = 12;
+                chosenWord();
+            } else {
+                return
+            }
+        })
+}
+
+chosenWord();

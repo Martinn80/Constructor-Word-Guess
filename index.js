@@ -6,7 +6,7 @@ let inquirer = require("inquirer");
 let letterArray = "abcdefghijklmnopqrstuvwxyz";
 
 // List of words to choose from
-let usStates = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawai", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+let usStates = ["alabama", "alaska", "arizona", "arkansas", "california", "colorado", "connecticut", "delaware", "florida", "georgia", "hawai", "idaho", "illinois", "indiana", "iowa", "kansas", "kentucky", "louisiana", "maine", "maryland", "massachusetts", "michigan", "minnesota", "mississippi", "missouri", "montana", "nebraska", "nevada", "new hampshire", "new jersey", "new mexico", "new york", "north carolina", "north dakota", "ohio", "oklahoma", "oregon", "pennsylvania", "rhode island", "south carolina", "south dakota", "tennessee", "texas", "utah", "vermont", "virginia", "washington", "west virginia", "wisconsin", "wyoming"];
 
 // Pick Random index from US States array
 let randomIndex = Math.floor(Math.random() * usStates.length);
@@ -125,14 +125,14 @@ function restartGame() {
         .prompt([
             {
                 type: "list",
-                message: "What would you like to:",
-                choices: ["Play Again", "Exit"],
+                message: "Would you like to play again?",
+                choices: ["Play Again", "Exit Game"],
                 name: "restart"
             }
-        ]);
+        ])
         .then(function (input) {
             if (input.restart === "Play Again") {
-                requireNewWord = true;
+                generateNewWord = true;
                 incorrectLetters = [];
                 correctLetters = [];
                 guessesLeft = 12;
